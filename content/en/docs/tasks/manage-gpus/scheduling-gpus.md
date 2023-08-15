@@ -3,25 +3,23 @@ reviewers:
 - vishh
 content_type: concept
 title: Schedule GPUs
-description: Configure and schedule GPUs for use as a resource by nodes in a cluster.
+description: Configure GPUs for use as cluster node resources.
 ---
 
 <!-- overview -->
 
 {{< feature-state state="stable" for_k8s_version="v1.26" >}}
 
-Kubernetes includes **stable** support for managing AMD and NVIDIA GPUs
-(graphical processing units) across different nodes in your cluster, using
+Kubernetes includes **stable** support to let Pods access specialized
+hardware features such as GPUs (graphical processing units), using
 {{< glossary_tooltip text="device plugins" term_id="device-plugin" >}}.
 
-This page describes how users can consume GPUs, and outlines
+This page describes how workloads can request GPU resources, and outlines
 some of the limitations in the implementation.
 
 <!-- body -->
 
 ## Using device plugins
-
-Kubernetes implements device plugins to let Pods access specialized hardware features such as GPUs.
 
 {{% thirdparty-content %}}
 
@@ -82,6 +80,12 @@ That label key `accelerator` is just an example; you can use
 a different label key if you prefer.
 
 ## Automatic node labelling {#node-labeller}
+
+There are few alternatives for node label automation.
+
+Kubernetes [Node Feature Discovery](https://kubernetes-sigs.github.io/node-feature-discovery/stable/get-started/index.html)
+automatically adds node [labels for PCI devices](https://kubernetes-sigs.github.io/node-feature-discovery/stable/usage/features.html#pci)
+and can be configured to provide additional labels based on different rules.
 
 If you're using AMD GPU devices, you can deploy
 [Node Labeller](https://github.com/RadeonOpenCompute/k8s-device-plugin/tree/master/cmd/k8s-node-labeller).
